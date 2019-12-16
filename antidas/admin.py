@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Registration, table_link
 
-# Register your models here.
+admin.site.register(Registration)
+admin.site.register(table_link)
