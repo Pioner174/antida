@@ -13,3 +13,4 @@ antidas/migrations/0001_initial.py
 antidas/migrations/0002_auto_20191217_0038.py
 antidas/migrations/__pycache__/0001_initial.cpython-38.pyc
 antidas/migrations/__pycache__/0002_auto_20191217_0038.cpython-38.pyc
+/venv/
