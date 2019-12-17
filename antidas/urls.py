@@ -8,5 +8,6 @@ app_name = 'antidas'
 urlpatterns = [
     path('', views.index, name='index'),
     path('reg/', TemplateView.as_view(template_name='antidas/reg.html')),
-    path('login/', LoginView.as_view(template_name='antidas/login.html'), name='login')
+    path('login/', LoginView.as_view(template_name='antidas/login.html'), name='login'),
+    path('test/', views.test, name='test'),
 ]
