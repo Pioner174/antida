@@ -41,7 +41,7 @@ class Linktest(View):
 class FolowLink(View):
 
     def get(self, request, short_link):
-        str_short_link='localhost:8000/test/'+short_link
+        str_short_link='http://localhost:8000/test/'+short_link
         id = table_link.objects.get(short_link=str_short_link)
         id.number_of_clicks+=1
         id.save()

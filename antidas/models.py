@@ -17,3 +17,5 @@ class table_link(models.Model):
     id_registration = models.ForeignKey(Registration, on_delete=models.CASCADE, null=True, blank=True)  #Возможно надо поменять on_delete=SET_NULL
     def __str__(self):
         return self.short_link
+
+    

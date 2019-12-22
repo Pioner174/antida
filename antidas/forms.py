@@ -14,6 +14,6 @@ class TableLinkForm(forms.Form):
         x = time.time()
         new_full_link = table_link.objects.create(
             full_link=self.cleaned_data['full_link'],
-            short_link='localhost:8000/test/'+short_url.encode_url(int(x), min_length = 7)
+            short_link='http://localhost:8000/test/'+short_url.encode_url(int(x), min_length = 7)
         )
         return new_full_link
