@@ -6,22 +6,33 @@
 {% endblock %}
 {% block content %}
   <div class="container mt-2"> 
-    <div class="input-group mb-4">
-      <input type="text" class="form-control" placeholder="Past link" aria-label="Past link" aria-describedby="button-addon2">
-      <div class="input-group-append">
-        <form action='actionUrl' method='POST'>
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Reduce</button>
-        </form>
-      </div>
+    <form action="{% url 'antidas:test' %}" method="post">
+      {% csrf_token %}
+      {% for link in links %}
+          <div class="form-group">
+              {% if link.errors %}
+                  <div class="alert alert-danger">
+                      {{ link.errors }}
+                  </div>
+              {% endif %}
+          {{ link.label }}
+          {{ link }}
+          </div>
+      {% endfor %}
+
+      <button type="submit" class="btn btn-primary">Reduce</button>
+
+  </form>
+      
     </div>
-    <input class="form-control" type="text" placeholder="Short link" readonly>
-    <div class="mt-4">
+    <div class="container-fluid mt-4 ">
       <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Full link</th>
             <th scope="col">Short link</th>
+            <th scope="col">Date create</th>
             <th scope="col">clics</th>
           </tr>
         </thead>
@@ -30,7 +41,7 @@
           <tr>
             <th scope="row">{{ qery.id }}</th>
             <td>
-              <a href="{{ qery.full_link }}">
+              <a  href="{{ qery.full_link }}" >
                   {{ qery.full_link }}
               </a>
             </td>
@@ -39,6 +50,7 @@
                 {{ qery }}
               </a>
             </td>
+            <td>{{ qery.date_create }}</td>
             <td>{{ qery.number_of_clicks }}</td>
           </tr>
           {% endfor %}

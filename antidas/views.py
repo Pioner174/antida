@@ -13,27 +13,41 @@ def index(request):
 
 
 
-def test(request):
-    queryset = table_link.objects.all()
-    url = 'antidas/test.html'
-    return render(request, template_name=url, context={'qeryset': queryset})
+# def test(request):
+#     queryset = table_link.objects.all()
+#     url = 'antidas/test.html'
+#     return render(request, template_name=url, context={'qeryset': queryset})
 
-
-class LinkCreate(View):
+class Linktest(View):
 
     def get(self, request):
+        queryset = table_link.objects.all()
         links = TableLinkForm()
-        return render(request, template_name='antidas/create.html', context={'links': links})
+        return render(request, template_name='antidas/test.html', context={'links': links, 'qeryset': queryset})
 
     def post(self, request):
         new_link = TableLinkForm(request.POST)
-        
+        queryset = table_link.objects.all()
+
         if new_link.is_valid():
             new_link_id = new_link.save()
-            return redirect(new_link_id)
+            return redirect('/test')
 
-        return render(request, template_name='antidas/create.html', context={'links': new_link})
+        return render(request, template_name='antidas/test.html')
 
+
+
+
+class FolowLink(View):
+
+    def get(self, request, short_link):
+        str_short_link='localhost:8000/test/'+short_link
+        id = table_link.objects.get(short_link=str_short_link)
+        id.number_of_clicks+=1
+        id.save()
+        return redirect(id.full_link)
+
+    
 
 
 

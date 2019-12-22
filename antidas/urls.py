@@ -9,7 +9,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('reg/', TemplateView.as_view(template_name='antidas/reg.html')),
     path('login/', LoginView.as_view(template_name='antidas/login.html'), name='login'),
-    path('test/', views.test, name='test'),
-    path('create/', views.LinkCreate.as_view(), name='tag_create'),
-    
+    path('test/', views.Linktest.as_view(), name='test'),
+    path('test/<str:short_link>', views.FolowLink.as_view(), name='link_out'),
 ]

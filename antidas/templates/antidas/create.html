@@ -8,17 +8,17 @@ Create Link
 
     <form action="{% url 'antidas:tag_create' %}" method="post">
         {% csrf_token %}
-            {% for link in links %}
-                <div class="form-group">
-                    {% if link.errors %}
-                        <div class="alert alert-danger">
-                            {{ link.errors }}
-                        </div>
-                    {% endif %}
-                {{ link.label }}
-                {{ link }}
-                </div>
-            {% endfor %}
+        {% for link in links %}
+            <div class="form-group">
+                {% if link.errors %}
+                    <div class="alert alert-danger">
+                        {{ link.errors }}
+                    </div>
+                {% endif %}
+            {{ link.label }}
+            {{ link }}
+            </div>
+        {% endfor %}
 
         <button type="submit" class="btn btn-primary">Reduce</button>
 
