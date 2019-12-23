@@ -14,12 +14,14 @@ class table_link(models.Model):
     number_of_clicks = models.IntegerField(help_text=_('Number of clicks on the link'),default=0)
     # id_registration = models.ForeignKey( , on_delete=models.CASCADE, null=True, blank=True)
     session_key = models.CharField(max_length=100,unique = False)
+    user_login = models.CharField(max_length=100,unique = False, null=True)
 
     def __str__(self):
         return self.short_link
+    
+    
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    
     
 
     
