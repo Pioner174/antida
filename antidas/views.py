@@ -21,7 +21,7 @@ def index(request):
 class Linktest(View):
 
     def get(self, request):
-        queryset = table_link.objects.all()
+        queryset = table_link.objects.order_by('-date_create')
         links = TableLinkForm()
         return render(request, template_name='antidas/test.html', context={'links': links, 'qeryset': queryset})
 
@@ -30,7 +30,7 @@ class Linktest(View):
         queryset = table_link.objects.all()
 
         if new_link.is_valid():
-            new_link_id = new_link.save()
+            new_link_id = new_link.save(request.build_absolute_uri())
             return redirect('/test')
 
         return render(request, template_name='antidas/test.html')

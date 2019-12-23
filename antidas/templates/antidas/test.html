@@ -39,7 +39,7 @@
         <tbody>
           {% for qery in qeryset %}
           <tr>
-            <th scope="row">{{ qery.id }}</th>
+            <th scope="row">{{ forloop.revcounter }}</th>
             <td>
               <a  href="{{ qery.full_link }}" >
                   {{ qery.full_link }}

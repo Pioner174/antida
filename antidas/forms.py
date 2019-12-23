@@ -10,10 +10,10 @@ class TableLinkForm(forms.Form):
 
     full_link.widget.attrs.update({'class': 'form-control'})
 
-    def save(self):
+    def save(self, path):
         x = time.time()
         new_full_link = table_link.objects.create(
-            full_link=self.cleaned_data['full_link'],
-            short_link='http://localhost:8000/test/'+short_url.encode_url(int(x), min_length = 7)
+            full_link = self.cleaned_data['full_link'],
+            short_link = path + short_url.encode_url(int(x), min_length = 7)
         )
         return new_full_link
