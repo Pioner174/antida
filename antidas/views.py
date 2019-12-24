@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
 from django.views.decorators.http import require_http_methods
 from django.views.generic import View 
-from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user,_get_user_session_key
 from django.contrib import auth
 from django.views.decorators.csrf import requires_csrf_token
@@ -12,22 +10,28 @@ from django.views.decorators.csrf import requires_csrf_token
 from .models import  table_link
 from .forms import TableLinkForm
 
-
-
 class Linktest(View):
 
     def get(self, request):
         if request.user.is_authenticated:
             queryset = table_link.objects.filter(user_login=get_user(request)).order_by('-date_create')
             links = TableLinkForm()
-            return render(request, template_name='antidas/test.html', context={'links': links, 'qeryset': queryset})
+            return render(request, template_name='antidas/test.html', context={
+                'links': links,
+                'qeryset': queryset,
+                'href' : request.get_host(),
+            })
         else:
            if hasattr(request, 'session') and not request.session.session_key:
                 request.session.save()
                 request.session.modified = True
         queryset = table_link.objects.filter(session_key=request.session.session_key).order_by('-date_create')
         links = TableLinkForm()
-        return render(request, template_name='antidas/test.html', context={'links': links, 'qeryset': queryset})
+        return render(request, template_name='antidas/test.html', context={
+                'links': links,
+                'qeryset': queryset,
+                'href' : request.get_host(),
+            })
     
 
     def post(self, request):
@@ -55,6 +59,7 @@ class FolowLink(View):
         id.number_of_clicks+=1
         id.save()
         return redirect(id.full_link)
+        
 
     
 
