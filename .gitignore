@@ -35,3 +35,5 @@ antidas/migrations/__pycache__/0010_auto_20191223_2121.cpython-38.pyc
 antidas/migrations/__pycache__/0011_remove_table_link_id_registration.cpython-38.pyc
 antidas/migrations/__pycache__/0012_auto_20191223_2250.cpython-38.pyc
 antidas/migrations/__pycache__/0013_table_link_user_login.cpython-38.pyc
+antidas/__pycache__/forms.cpython-38.pyc
+antidas/__pycache__/forms.cpython-38.pyc
