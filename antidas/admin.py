@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import  table_link
+from .models import  TableLink
 
 
-admin.site.register(table_link)
+admin.site.register(TableLink)
 

@@ -85,7 +85,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
         'USER': 'postgres',  # ubuntu admin : 123456
-        'PASSWORD': '1234', # windows postgres: 1234
+        'PASSWORD': '2505', # windows postgres: 1234
     }
 }
 
