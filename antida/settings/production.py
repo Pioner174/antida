@@ -8,7 +8,7 @@ ADMINS = [
     ('Matanin R', 'Romashka951@gmail.com')
 ]
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS']
 
 DATABASES = {
     'default': {
