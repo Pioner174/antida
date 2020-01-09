@@ -46,8 +46,8 @@
               </a>
             </td>
             <td>
-              <a href="{{ qery }}">
-                {{ qery }}
+              <a href="{% url 'antidas:test' %}{{ qery.short_link }}">
+                {{ href_link }}{% url 'antidas:test' %}{{ qery.short_link }}
               </a>
             </td>
             <td>{{ qery.date_create }}</td>

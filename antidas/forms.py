@@ -12,20 +12,21 @@ class TableLinkForm(forms.Form):
 
     full_link.widget.attrs.update({'class': 'form-control'})
 
-    def save_user(self, path, ssk):
+
+    def save_user(self, ssk):
         x = time.time()
         new_full_link = TableLink.objects.create(
             full_link=self.cleaned_data['full_link'],
-            short_link=path + short_url.encode_url(int(x), min_length=8),
+            short_link=short_url.encode_url(int(x), min_length=8),
             user_login=ssk
         )
         return new_full_link
 
-    def save_session(self, path, ssk):
+    def save_session(self, ssk):
         x = time.time()
         new_full_link = TableLink.objects.create(
             full_link=self.cleaned_data['full_link'],
-            short_link=path + short_url.encode_url(int(x), min_length=8),
+            short_link=short_url.encode_url(int(x), min_length=8),
             session_key=ssk
         )
         return new_full_link
