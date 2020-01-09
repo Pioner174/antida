@@ -37,11 +37,12 @@ class LinkTest(View):
         queryset = TableLink.objects.all()
         if request.user.is_authenticated:
             if new_link.is_valid():
-                new_link_id = new_link.save_user(get_user(request))
+                new_link_id = new_link.save(user_login=get_user(request))
                 return redirect('/')
         else:
             if new_link.is_valid():
-                new_link_id = new_link.save_session(request.session.session_key)
+                new_link_id = new_link.save(
+                    session_key=request.session.session_key)
                 return redirect('/') 
 
         return render(request, template_name='antidas/test.html')
