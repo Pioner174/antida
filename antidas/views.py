@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth import get_user
-import pysnooper
+from django.db.models import F
 
 from .models import TableLink
 from .forms import TableLinkForm
 
 
 class LinkTest(View):
-    @pysnooper.snoop()
+
     def get(self, request):
         if request.user.is_authenticated:
             queryset = TableLink.objects.filter(
@@ -27,7 +27,6 @@ class LinkTest(View):
             session_key=request.session.session_key).order_by('-date_create')
         links = TableLinkForm()
         return render(request, template_name='antidas/test.html', context={
-            # 'short_link': short_link,
             'links': links,
             'qeryset': queryset,
             'href_link': request.get_host(),
@@ -49,9 +48,9 @@ class LinkTest(View):
 
 
 class FolowLink(View):
-    @pysnooper.snoop()
+
     def get(self, request, short_link):
         id = TableLink.objects.get(short_link=short_link)
-        id.number_of_clicks += 1
+        id.number_of_clicks = F('number_of_clicks') + 1
         id.save()
         return redirect(id.full_link)
