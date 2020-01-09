@@ -2,7 +2,6 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 import short_url
 import time
-import pysnooper
 from django.db.models import F
 
 from .models import TableLink
