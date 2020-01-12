@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
 from django.contrib.auth import get_user
 from django.db.models import F
@@ -34,15 +34,13 @@ class LinkTest(View):
 
     def post(self, request):
         new_link = TableLinkForm(request.POST)
-        queryset = TableLink.objects.all()
         if request.user.is_authenticated:
             if new_link.is_valid():
-                new_link_id = new_link.save(user_login=get_user(request))
+                new_link.save(user_login=get_user(request))
                 return redirect('/')
         else:
             if new_link.is_valid():
-                new_link_id = new_link.save(
-                    session_key=request.session.session_key)
+                new_link.save(session_key=request.session.session_key)
                 return redirect('/') 
 
         return render(request, template_name='antidas/test.html')
@@ -51,7 +49,7 @@ class LinkTest(View):
 class FolowLink(View):
 
     def get(self, request, short_link):
-        id = TableLink.objects.get(short_link=short_link)
-        id.number_of_clicks = F('number_of_clicks') + 1
-        id.save()
-        return redirect(id.full_link)
+        link = get_object_or_404(TableLink, short_link=short_link)
+        link.number_of_clicks = F('number_of_clicks') + 1
+        link.save()
+        return redirect(link.full_link)
